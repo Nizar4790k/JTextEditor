@@ -5,6 +5,11 @@
  */
 package view;
 
+import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+
 /**
  *
  * @author Nizar4790k
@@ -16,7 +21,15 @@ public class FontForm extends javax.swing.JFrame {
      */
     public FontForm() {
         initComponents();
+        customizeComponents();
         
+    }
+    
+    private void customizeComponents(){
+        Border border = BorderFactory.createLineBorder(Color.BLACK);
+        
+        TitledBorder titledBorder =BorderFactory.createTitledBorder(border, "Test here");
+        jPanel8.setBorder(titledBorder);
     }
 
     /**
@@ -62,17 +75,21 @@ public class FontForm extends javax.swing.JFrame {
 
         jPanel8.setLayout(new java.awt.CardLayout(20, 10));
 
-        jTextField3.setText("jTextField3");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
         jPanel8.add(jTextField3, "card2");
 
         jPanel1.add(jPanel8);
 
         jPanel4.setLayout(new java.awt.BorderLayout());
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Apply");
         jPanel7.add(jButton2);
 
-        jButton4.setText("jButton4");
+        jButton4.setText("Cancel");
         jPanel7.add(jButton4);
 
         jPanel4.add(jPanel7, java.awt.BorderLayout.LINE_END);
@@ -133,7 +150,7 @@ public class FontForm extends javax.swing.JFrame {
 
         jPanel14.setLayout(new java.awt.GridLayout(1, 1));
 
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
@@ -164,7 +181,7 @@ public class FontForm extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -217,6 +234,10 @@ public class FontForm extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
