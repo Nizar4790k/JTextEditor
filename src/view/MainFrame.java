@@ -5,6 +5,22 @@
  */
 package view;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Nizar4790k
@@ -16,6 +32,9 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        
+
+               
     }
 
     /**
@@ -48,6 +67,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("");
         setBounds(300,300,640,480);
 
         jTextArea1.setColumns(20);
@@ -82,6 +102,11 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/img/icons/iconfinder_floppy_285657.png"))); // NOI18N
         jMenuItem1.setText("Save");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
@@ -97,6 +122,11 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/img/icons/iconfinder_Cancel_1493282.png"))); // NOI18N
         jMenuItem5.setText("Exit");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
 
         jMenuBar1.add(jMenu1);
@@ -116,16 +146,31 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/img/icons/iconfinder_content-copy_326595.png"))); // NOI18N
         jMenuItem9.setText("Copy");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem9);
 
         jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/img/icons/iconfinder_Paste_27862.png"))); // NOI18N
         jMenuItem8.setText("Paste");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem8);
 
         jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0));
         jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/img/icons/iconfinder_basket_1814090.png"))); // NOI18N
         jMenuItem11.setText("Delete");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem11);
 
         jMenuBar1.add(jMenu2);
@@ -134,6 +179,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/img/icons/iconfinder_106_Fonts_183232.png"))); // NOI18N
         jMenuItem12.setText("Font..");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem12);
 
         jMenuBar1.add(jMenu3);
@@ -142,6 +192,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/img/icons/iconfinder_about_2639759.png"))); // NOI18N
         jMenuItem13.setText("About JTextEditor");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem13);
 
         jMenuBar1.add(jMenu5);
@@ -156,16 +211,95 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
+        int dialog = JOptionPane.showConfirmDialog(this,"Are you sure to save the file ?","Save?",JOptionPane.YES_NO_CANCEL_OPTION);
+        
+        if(JOptionPane.OK_OPTION==dialog){               
+        
+            String name = fileChooser.getName();
+            jMenuItem1ActionPerformed(evt);
+            
+          }
+        
+        this.fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(this);
+        
+        if(returnValue==JFileChooser.APPROVE_OPTION){
+            
+            try {
+                readFile(fileChooser.getSelectedFile());
+                this.setTitle(fileChooser.getSelectedFile().getName());
+                //Opening a file
+            } catch (IOException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+                this.fileChooser = new JFileChooser();  // Save Option
+           int returnVal = fileChooser.showSaveDialog(this);
+           
+           if(returnVal==JFileChooser.APPROVE_OPTION){
+                    try {
+                        File file =fileChooser.getSelectedFile();
+                        saveFile(file);
+                        setTitle(file.getName());
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+             
+           }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
+        jTextArea1.cut();
+        
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       
+            if(getTitle().equals("")){
+              jMenuItem3ActionPerformed(evt);
+          } else {
+                try {
+                    saveFile(fileChooser.getSelectedFile());
+                } catch (IOException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+           
+           
+           
+     
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+       System.exit(0);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        new AboutForm();
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+      new FontForm();  // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        jTextArea1.copy();
+        
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        jTextArea1.paste();
+        
+        
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+       
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,7 +334,67 @@ public class MainFrame extends javax.swing.JFrame {
                 new MainFrame().setVisible(true);
             }
         });
-    }
+        }
+    
+        private void saveFile(File file) throws FileNotFoundException, IOException {
+        
+            FileOutputStream fstream = new FileOutputStream(file);
+            BufferedWriter br = new BufferedWriter(new OutputStreamWriter(fstream));
+            
+            try{
+                     br.write(jTextArea1.getText());
+                     
+            }finally{
+                
+                br.close();
+                fstream.close();
+                
+            }
+            
+            
+            
+         /*
+            try {                       
+            FileWriter fileWriter;
+              fileWriter= new FileWriter(file);
+              
+              fileWriter.write(jTextArea1.getText());
+              fileWriter.close();
+           
+           } catch (IOException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            */
+            
+            }
+    
+        private void readFile(File file) throws IOException{
+      
+            FileInputStream fstream = new FileInputStream(file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+            
+            String strLine;
+            
+        
+            try{
+                 while((strLine=br.readLine())!=null){
+                jTextArea1.append(strLine);
+                jTextArea1.append("\n");
+            }
+            
+            } finally{
+              
+               br.close();
+               fstream.close();
+            }
+           
+           
+        }
+    
+
+        
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
@@ -223,4 +417,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
+    private JFileChooser fileChooser;
+    
+
 }

@@ -4,9 +4,13 @@
  * and open the template in the editor.
  */
 package view;
-
+import java.util.ArrayList;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.List;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
@@ -16,12 +20,20 @@ import javax.swing.border.TitledBorder;
  */
 public class FontForm extends javax.swing.JFrame {
 
+   
+    
     /**
      * Creates new form FontForm
      */
     public FontForm() {
         initComponents();
         customizeComponents();
+        
+        
+        
+       
+        
+        
         
     }
     
@@ -30,6 +42,30 @@ public class FontForm extends javax.swing.JFrame {
         
         TitledBorder titledBorder =BorderFactory.createTitledBorder(border, "Test here");
         jPanel8.setBorder(titledBorder);
+        
+        GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        
+        String [] fonts = e.getAvailableFontFamilyNames();
+        
+          DefaultListModel<String> model = new DefaultListModel<>();
+        
+         for(String x :fonts){
+            model.addElement(x);
+         }
+         jList2.setModel(model);
+         setVisible(true);
+         
+         DefaultListModel<String> sizes = new DefaultListModel();
+         
+         for(int i=6;i<100;i++){
+             if(i%2==0){
+                 sizes.addElement(String.valueOf(i));
+                 
+             }
+         }
+         
+         jList1.setModel(sizes);
+        
     }
 
     /**
@@ -122,15 +158,17 @@ public class FontForm extends javax.swing.JFrame {
         jPanel17Layout.setHorizontalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(15, 15, 15))
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,12 +191,6 @@ public class FontForm extends javax.swing.JFrame {
         jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(jList2);
 
         jLabel2.setText("Family:");
@@ -190,7 +222,7 @@ public class FontForm extends javax.swing.JFrame {
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         jList3.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "Italic", "Bold", " " };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
