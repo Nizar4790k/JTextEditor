@@ -12,6 +12,8 @@ import java.awt.List;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
@@ -26,10 +28,15 @@ public class FontForm extends javax.swing.JFrame {
     /**
      * Creates new form FontForm
      */
-    public FontForm() {
-        initComponents();
+    
+    public FontForm(){
+         initComponents();
         customizeComponents();
-        
+    }
+    public FontForm(JTextArea jTextArea) {
+       initComponents();
+       customizeComponents();
+       this.jTextArea1= jTextArea;
         
         
         
@@ -147,6 +154,11 @@ public class FontForm extends javax.swing.JFrame {
         jPanel7.add(jButton2);
 
         jButton4.setText("Cancel");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel7.add(jButton4);
 
         jPanel4.add(jPanel7, java.awt.BorderLayout.LINE_END);
@@ -162,6 +174,11 @@ public class FontForm extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
+        jTextField1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTextField1PropertyChange(evt);
+            }
+        });
 
         jLabel5.setText("Size:");
 
@@ -173,6 +190,16 @@ public class FontForm extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
+        });
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
@@ -256,11 +283,21 @@ public class FontForm extends javax.swing.JFrame {
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         jList3.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Plain", "Italic", "Bold", " " };
+            String[] strings = { "Plain", "Italic", "Bold" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         jList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jList3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList3MouseClicked(evt);
+            }
+        });
+        jList3.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList3ValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(jList3);
 
         jLabel3.setText("Style:");
@@ -271,7 +308,7 @@ public class FontForm extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
@@ -308,23 +345,86 @@ public class FontForm extends javax.swing.JFrame {
 
     private void jList2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList2ValueChanged
      
-      
-      
-    }//GEN-LAST:event_jList2ValueChanged
-
-    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
-        Font font = jTextField3.getFont();
+       Font font = jTextField3.getFont();
         
         String name = jList2.getSelectedValue();
         
   
         jTextField3.setFont(new Font(name,font.getStyle(),font.getSize()));
+      
+    }//GEN-LAST:event_jList2ValueChanged
+
+    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
+       
        
     }//GEN-LAST:event_jList2MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
+       jTextArea1.setFont(jTextField3.getFont());
+       this.dispose();        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jList3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList3MouseClicked
+       
+        
+        
+        
+    }//GEN-LAST:event_jList3MouseClicked
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+      
+       
+       
+      
+    }//GEN-LAST:event_jList1MouseClicked
+
+    private void changeSize(int size) throws NumberFormatException{
+        Font font =  jTextField3.getFont();
+        
+        jTextField3.setFont(new Font(font.getName(),font.getStyle(),size));
+        
+    }
+    
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        changeSize(Integer.parseInt(jList1.getSelectedValue()));
+    }//GEN-LAST:event_jList1ValueChanged
+
+    private void jList3ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList3ValueChanged
+       Font font = jTextField3.getFont();
+        
+        String style = jList3.getSelectedValue();
+        
+        switch (style) {
+            case "Plain":
+                jTextField3.setFont(new Font(font.getName(),Font.PLAIN,font.getSize()));
+                break;
+            case "Italic":
+                jTextField3.setFont(new Font(font.getName(),Font.ITALIC,font.getSize())); 
+                break;
+            default:
+                jTextField3.setFont(new Font(font.getName(),Font.BOLD,font.getSize()));
+                break;
+        }
+    }//GEN-LAST:event_jList3ValueChanged
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTextField1PropertyChange
+       
+        String value = jTextField1.getText();
+        try {
+            if(!(value.equals(null) || value.trim().equals(""))){
+              changeSize(Integer.parseInt(value));  
+            }
+            
+        } catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Value not Allowed!","ERROR",JOptionPane.ERROR_MESSAGE);
+            
+        }
+    }//GEN-LAST:event_jTextField1PropertyChange
 
     /**
      * @param args the command line arguments
@@ -361,6 +461,7 @@ public class FontForm extends javax.swing.JFrame {
         });
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
@@ -387,5 +488,7 @@ public class FontForm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+    private JTextArea jTextArea1;
+
 }
 
