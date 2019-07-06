@@ -35,8 +35,10 @@ public class FontForm extends javax.swing.JFrame {
     }
     public FontForm(JTextArea jTextArea) {
        initComponents();
-       customizeComponents();
        this.jTextArea1= jTextArea;
+       customizeComponents();
+      
+
         
         
         
@@ -46,7 +48,7 @@ public class FontForm extends javax.swing.JFrame {
         
     }
     
-    private void customizeComponents(){
+      private void customizeComponents(){
         Border border = BorderFactory.createLineBorder(Color.BLACK);
         
         TitledBorder titledBorder =BorderFactory.createTitledBorder(border, "Test here");
@@ -63,10 +65,10 @@ public class FontForm extends javax.swing.JFrame {
          }
          jList2.setModel(model);
          
-         
+         Font font = jTextArea1.getFont();
          
          for(int i=0;i<fonts.length;i++){
-           if(fonts[i].equals("Dialog")){
+           if(fonts[i].equals(font.getName())){
                 jList2.setSelectedIndex(i);
             } 
          }
@@ -86,9 +88,32 @@ public class FontForm extends javax.swing.JFrame {
          
          jList1.setModel(sizes);
         
-         jList3.setSelectedIndex(0);
-         jList1.setSelectedIndex(3);
+         
+
+         for(int i=0;i<sizes.size();i++){
+             if(Integer.valueOf(sizes.get(i))==font.getSize()){
+                 jList1.setSelectedIndex(i);
+             }
+         }
+         
+         
+         switch(font.getStyle()){
+             case Font.PLAIN:
+                 jList3.setSelectedIndex(0);
+                 break;
+                 
+             case Font.ITALIC:
+                 jList3.setSelectedIndex(1);
+                 break;
+                 
+             default:
+                 jList3.setSelectedIndex(2);
+                 break;
+       
+         }
         
+                  
+    
     }
 
     /**
