@@ -216,7 +216,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         int dialog = JOptionPane.showConfirmDialog(this,"Are you sure to save the file ?","Save?",JOptionPane.YES_OPTION);
         if(JOptionPane.OK_OPTION==dialog){
-            jMenuItem2ActionPerformed(evt);
+            jMenuItem1ActionPerformed(evt);
         }
         
         new MainFrame();
