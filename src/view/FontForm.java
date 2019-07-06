@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.List;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.border.Border;
@@ -28,6 +29,7 @@ public class FontForm extends javax.swing.JFrame {
     public FontForm() {
         initComponents();
         customizeComponents();
+        
         
         
         
@@ -53,6 +55,17 @@ public class FontForm extends javax.swing.JFrame {
             model.addElement(x);
          }
          jList2.setModel(model);
+         
+         
+         
+         for(int i=0;i<fonts.length;i++){
+           if(fonts[i].equals("Dialog")){
+                jList2.setSelectedIndex(i);
+            } 
+         }
+         
+         
+         
          setVisible(true);
          
          DefaultListModel<String> sizes = new DefaultListModel();
@@ -65,6 +78,9 @@ public class FontForm extends javax.swing.JFrame {
          }
          
          jList1.setModel(sizes);
+        
+         jList3.setSelectedIndex(0);
+         jList1.setSelectedIndex(3);
         
     }
 
@@ -123,6 +139,11 @@ public class FontForm extends javax.swing.JFrame {
         jPanel4.setLayout(new java.awt.BorderLayout());
 
         jButton2.setText("Apply");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel7.add(jButton2);
 
         jButton4.setText("Cancel");
@@ -151,6 +172,7 @@ public class FontForm extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
@@ -191,6 +213,18 @@ public class FontForm extends javax.swing.JFrame {
         jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList2MouseClicked(evt);
+            }
+        });
+        jList2.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList2ValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(jList2);
 
         jLabel2.setText("Family:");
@@ -222,10 +256,11 @@ public class FontForm extends javax.swing.JFrame {
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         jList3.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Italic", "Bold", " " };
+            String[] strings = { "Plain", "Italic", "Bold", " " };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(jList3);
 
         jLabel3.setText("Style:");
@@ -270,6 +305,26 @@ public class FontForm extends javax.swing.JFrame {
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jList2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList2ValueChanged
+     
+      
+      
+    }//GEN-LAST:event_jList2ValueChanged
+
+    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
+        Font font = jTextField3.getFont();
+        
+        String name = jList2.getSelectedValue();
+        
+  
+        jTextField3.setFont(new Font(name,font.getStyle(),font.getSize()));
+       
+    }//GEN-LAST:event_jList2MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -333,3 +388,4 @@ public class FontForm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
+

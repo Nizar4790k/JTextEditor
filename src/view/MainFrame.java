@@ -32,6 +32,10 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+         setBounds(200,100, 640, 480);
+         
+       
+       
         
 
                
@@ -68,7 +72,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("");
-        setBounds(300,300,640,480);
+        setBounds(new java.awt.Rectangle(200, 100, 640, 480));
+        setLocation(new java.awt.Point(200, 100));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
