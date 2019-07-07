@@ -233,6 +233,8 @@ public class MainFrame extends javax.swing.JFrame {
             String name = fileChooser.getName();
             jMenuItem1ActionPerformed(evt);
             
+          } else if(dialog==JOptionPane.CANCEL_OPTION){
+              return;
           }
         
         this.fileChooser = new JFileChooser();
