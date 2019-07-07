@@ -217,6 +217,8 @@ public class MainFrame extends javax.swing.JFrame {
         int dialog = JOptionPane.showConfirmDialog(this,"Are you sure to save the file ?","Save?",JOptionPane.YES_OPTION);
         if(JOptionPane.OK_OPTION==dialog){
             jMenuItem1ActionPerformed(evt);
+        } else if(dialog==JOptionPane.CANCEL_OPTION){
+            return;
         }
         
         new MainFrame();
